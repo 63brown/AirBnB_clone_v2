@@ -4,6 +4,8 @@ from models.base_model import BaseModel, Base
 from os import environ
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.sql.schema import ForeignKey
+import sqlalchemy
+import models
 
 
 class Review(BaseModel, Base):
@@ -17,3 +19,7 @@ class Review(BaseModel, Base):
         place_id = ""
         user_id = ""
         text = ""
+        
+    def __init__(self, *args, **kwargs):
+        """initializes Review"""
+        super().__init__(*args, **kwargs)
