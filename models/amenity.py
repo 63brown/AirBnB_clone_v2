@@ -2,7 +2,7 @@
 """ holds class Amenity"""
 import models
 from models.base_model import BaseModel, Base
-from os import getenv
+from os import environ
 import sqlalchemy
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
@@ -10,8 +10,9 @@ from sqlalchemy.orm import relationship
 
 class Amenity(BaseModel, Base):
     """Representation of Amenity """
-    if models.storage_t == 'db':
-        __tablename__ = 'amenities'
+    __tablename__ = 'amenities'
+    
+    if environ['HBNB_TYPE_STORAGE'] == 'db':
         name = Column(String(128), nullable=False)
     else:
         name = ""
