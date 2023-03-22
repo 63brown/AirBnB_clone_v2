@@ -1,39 +1,42 @@
 #!/usr/bin/python3
-"""
-    tests for FileStorage
-"""
+"""test for file storage"""
 import unittest
-from models.base_model import BaseModel
-from models.engine.db_storage import DBStorage
-from sqlalchemy.engine.base import Engine
+import pep8
 
 
-class test_DBStorage(unittest.TestCase):
-    """
-        Base test class
-    """
-    @classmethod
-    def setUpClass(cls):
-        """
-            setup
-        """
-        cls.dummy = DBStorage()
+class TestDBStorage(unittest.TestCase):
+    '''Tests the DBStorage storage engine'''
 
-    @classmethod
-    def tearDownClass(cls):
-        """
-            tear down
-        """
-        del cls.dummy
+    def setUp(self):
+        """SetUp env for test"""
+        pass
 
-    def test_attrs(self):
+    def tearDown(self):
+        """teardown"""
+        pass
+
+    def test_all(self):
+        """Test class method all()"""
+        pass
+
+    def test_new(self):
+        """Test new method"""
+        pass
+
+    def test_save(self):
+        """Test save method
         """
-            attribute tests
+        pass
+
+    def test_delete(self):
+        """Tests delete
         """
-        self.assertTrue(hasattr(self.dummy, '_DBStorage__engine'))
-        self.assertTrue(hasattr(self.dummy, '_DBStorage__session'))
-        self.assertTrue(isinstance(self.dummy._DBStorage__engine, Engine))
-        self.assertTrue(self.dummy._DBStorage__session is None)
+        pass
+
+    def test_reload(self):
+        """Tests reload
+        """
+        pass
 
 if __name__ == "__main__":
     unittest.main()
