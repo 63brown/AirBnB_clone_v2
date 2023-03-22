@@ -4,16 +4,21 @@ import models
 from models.base_model import BaseModel, Base
 from os import environ
 import sqlalchemy
-from sqlalchemy import Column, String
+from models.city import City
+from models.user import User
+from models.place import place_amenity
+from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 
 
 class Amenity(BaseModel, Base):
     """Representation of Amenity """
-    __tablename__ = 'amenities'
-    
     if environ['HBNB_TYPE_STORAGE'] == 'db':
+        __tablename__ = "amenities"
         name = Column(String(128), nullable=False)
+        place_amenities = relationship(
+            "Place",
+            secondary=place_amenity, back_populates="amenities")
     else:
         name = ""
 
