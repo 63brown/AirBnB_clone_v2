@@ -1,20 +1,23 @@
 #!/usr/bin/python3
-""" Review module for the HBNB project """
+"""
+    contains review class to represent reviews
+"""
 from models.base_model import BaseModel, Base
 from models.place import Place
 from models.user import User
-from os import environ
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, String, ForeignKey, create_engine, Integer
+from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.sql.schema import ForeignKey
-import sqlalchemy
-import models
+from os import environ
+
+storage_engine = environ.get("HBNB_TYPE_STORAGE")
 
 
 class Review(BaseModel, Base):
-    """ Review classto store review information """
-    
-    if environ['HBNB_TYPE_STORAGE'] == 'db':
+    """
+        Review class
+    """
+    if (storage_engine == 'db'):
         __tablename__ = "reviews"
         place_id = Column(String(60), ForeignKey("places.id"))
         user_id = Column(String(60), ForeignKey("users.id"))
@@ -24,7 +27,3 @@ class Review(BaseModel, Base):
         place_id = ""
         user_id = ""
         text = ""
-        
-    def __init__(self, *args, **kwargs):
-        """initializes Review"""
-        super().__init__(*args, **kwargs)

@@ -1,14 +1,17 @@
 #!/usr/bin/python3
-""" Place Module for HBNB project """
+"""
+    module containing places to represent the place
+    module containing places to represent the place
+"""
 from models.base_model import BaseModel, Base
-from os import environ
-from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
 import models
-import sqlalchemy
+from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
+from os import environ
 
+storage_engine = environ.get("HBNB_TYPE_STORAGE")
 
-if environ['HBNB_TYPE_STORAGE'] == 'db':
+if storage_engine == "db":
     place_amenity = Table('place_amenity', Base.metadata,
                           Column('place_id', String(60),
                                  ForeignKey('places.id'),
@@ -17,10 +20,14 @@ if environ['HBNB_TYPE_STORAGE'] == 'db':
                                  ForeignKey('amenities.id'),
                                  primary_key=True, nullable=False))
 
+
 class Place(BaseModel, Base):
-    """ A place to stay """
-    __tablename__ = 'places'
-    if environ['HBNB_TYPE_STORAGE'] == 'db':
+    """
+        Place class to represent places
+        Place class to represent places
+    """
+    __tablename__ = "places"
+    if (storage_engine == "db"):
         city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
         user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
         name = Column(String(128), nullable=False)
@@ -49,7 +56,7 @@ class Place(BaseModel, Base):
         latitude = 0.0
         longitude = 0.0
         amenity_ids = []
-        
+
         @property
         def reviews(self):
             """getter function for reviews attribute"""
@@ -76,8 +83,3 @@ class Place(BaseModel, Base):
             temp = models.dummy_classes['Amenity']
             if (isinstance(obj, models.storage.all(temp))):
                 self.amenity_ids.append(obj.id)
-        
-    def __init__(self, *args, **kwargs):
-        """initializes Place"""
-        super().__init__(*args, **kwargs)
-        

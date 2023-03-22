@@ -4,10 +4,11 @@
 """
 import unittest
 from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
+from models.engine.db_storage import DBStorage
+from sqlalchemy.engine.base import Engine
 
 
-class test_FileStorage(unittest.TestCase):
+class test_DBStorage(unittest.TestCase):
     """
         Base test class
     """
@@ -16,7 +17,7 @@ class test_FileStorage(unittest.TestCase):
         """
             setup
         """
-        cls.dummy = FileStorage()
+        cls.dummy = DBStorage()
 
     @classmethod
     def tearDownClass(cls):
@@ -29,10 +30,10 @@ class test_FileStorage(unittest.TestCase):
         """
             attribute tests
         """
-        self.assertTrue(hasattr(self.dummy, "_FileStorage__objects"))
-        self.assertTrue(isinstance(self.dummy._FileStorage__objects, dict))
-        self.assertTrue(hasattr(self.dummy, "_FileStorage__file_path"))
-        self.assertTrue(isinstance(self.dummy._FileStorage__file_path, str))
+        self.assertTrue(hasattr(self.dummy, '_DBStorage__engine'))
+        self.assertTrue(hasattr(self.dummy, '_DBStorage__session'))
+        self.assertTrue(isinstance(self.dummy._DBStorage__engine, Engine))
+        self.assertTrue(self.dummy._DBStorage__session is None)
 
 if __name__ == "__main__":
     unittest.main()
