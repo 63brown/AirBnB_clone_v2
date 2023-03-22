@@ -4,8 +4,14 @@ import uuid
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, DateTime
+from os import environ
 
-Base = declarative_base()
+storage_engine = environ.get("HBNB_TYPE_STORAGE")
+
+if (storage_engine == "db"):
+    Base = declarative_base()
+else:
+    Base = object
 
 class BaseModel:
     """A base class for all hbnb models"""
@@ -57,4 +63,5 @@ class BaseModel:
     def delete(self):
         """Delete the current instance from the storage"""
         from models import storage
-        storage.delete(self)
+        k = "{}.{}".format(type(self).__name__, self.id)
+        del storage.__objects[k]
