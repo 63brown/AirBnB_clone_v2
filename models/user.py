@@ -2,7 +2,7 @@
 """This module defines a class User"""
 from models.base_model import BaseModel
 from sqlalchemy import Column, String
-
+from os import environ
 
 class User(BaseModel):
     """This class defines a user by various attributes"""
