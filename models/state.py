@@ -11,9 +11,10 @@ class State(BaseModel, Base):
     """ Class attributes"""
 
     if environ['HBNB_TYPE_STORAGE'] == 'db':
+         
          __tablename__ = "states"
-        name = Column(String(128), nullable=False)
-        cities = relationship("City", backref="state")
+         name = Column(String(128), nullable=False)
+         cities = relationship("City", backref="state")
     else:
         name = ""
         
