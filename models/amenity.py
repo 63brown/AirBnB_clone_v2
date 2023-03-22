@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-""" State Module for HBNB project """
 #!/usr/bin/python
 """ holds class Amenity"""
 import models
