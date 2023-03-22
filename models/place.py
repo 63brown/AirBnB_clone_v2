@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from os import environ
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
 
 
-class Place(BaseModel):
+class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = 'places'
     if environ['HBNB_TYPE_STORAGE'] == 'db':
@@ -30,4 +30,4 @@ class Place(BaseModel):
         price_by_night = 0
         latitude = 0.0
         longitude = 0.0
-        amenity_ids = [] 
+        amenity_ids = []
