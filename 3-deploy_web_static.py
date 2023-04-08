@@ -1,6 +1,11 @@
-from fabric.api import *
-from os.path import exists
+#!/usr/bin/python3
+'''fcreates and distributes an archive to your web servers, using deploy():
+'''
+
+
+import os
 from datetime import datetime
+from fabric.api import env, local, put, run, runs_once
 
 
 env.hosts = ['100.26.177.16', '100.26.9.154']  # Replace with your own IP addresses
